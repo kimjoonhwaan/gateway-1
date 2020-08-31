@@ -1,0 +1,70 @@
+server:
+  port: 8080
+---
+
+spring:
+  profiles: default
+  cloud:
+    gateway:
+      routes:
+        - id: ScreeningManage
+          uri: http://localhost:8081
+          predicates:
+            - Path=/screenings/**
+        - id: HospitalManage
+          uri: http://localhost:8082
+          predicates:
+            - Path=/hospitals/** 
+        - id: ReservationManage
+          uri: http://localhost:8083
+          predicates:
+            - Path=/reservations/** 
+        - id: MyPage
+          uri: http://localhost:8084
+          predicates:
+            - Path= /myPages/**
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+            allowedOrigins:
+              - "*"
+            allowedMethods:
+              - "*"
+            allowedHeaders:
+              - "*"
+            allowCredentials: true
+
+
+---
+spring:
+  profiles: docker
+  cloud:
+    gateway:
+      routes:
+        - id: ScreeningManage
+          uri: http://ScreeningManage:8080
+          predicates:
+            - Path=/screenings/**, /hospitals/**
+        - id: HospitalManage
+          uri: http://HospitalManage:8080
+          predicates:
+            - Path=/hospitals/** 
+        - id: ReservationManage
+          uri: http://ReservationManage:8080
+          predicates:
+            - Path=/reservations/** 
+        - id: MyPage
+          uri: http://MyPage:8080
+          predicates:
+            - Path= /myPages/**
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+            allowedOrigins:
+              - "*"
+            allowedMethods:
+              - "*"
+            allowedHeaders:
+              - "*"
+            allowCredentials: true
+
