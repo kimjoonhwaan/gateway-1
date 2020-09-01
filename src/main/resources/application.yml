@@ -44,7 +44,7 @@ spring:
         - id: ScreeningManage
           uri: http://ScreeningManage:8080
           predicates:
-            - Path=/screenings/**, /hospitals/**
+            - Path=/screenings/**
         - id: HospitalManage
           uri: http://HospitalManage:8080
           predicates:
